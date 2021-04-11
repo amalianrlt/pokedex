@@ -5,7 +5,7 @@ import * as pages from "../pages";
 const RouterPage= () => {
   return (
     <Switch>
-      <Route path="/list" component={pages.MyPokemonList} exact />
+      <Route path="/owned" component={pages.MyPokemonList} exact />
       <Route path="/" component={pages.PokemonList} exact />
       <Route path="/detail/:id-:name" component={pages.PokemonDetail} exact />
     </Switch>
