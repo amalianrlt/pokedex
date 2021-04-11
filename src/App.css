@@ -45,6 +45,7 @@ h1{
     transform: rotate(360deg);
   }
 } */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500&display=swap");
 
 html,
 body,
@@ -56,4 +57,5 @@ h5,
 h6,
 p {
   margin: 0;
+  font-family: 'Poppins';
 }
