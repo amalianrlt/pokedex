@@ -23,7 +23,7 @@ const PokemonCard = (props) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        margin: "3px",
+        margin: "4px",
         // height: 200,
       }}
     >

@@ -21,7 +21,6 @@ const PokemonList = () => {
   });
 
 
-  // console.log(pokemons?.results?.map((pokemon) => pokemon?.name));Î
   return (
     <div
       style={{
@@ -34,7 +33,7 @@ const PokemonList = () => {
         flexDirection: "row",
         flexWrap: "wrap",
         padding: 15,
-        justifyContent: "space-between",
+        justifyContent: "center",
       }}
     >
       {pokemons &&
@@ -43,7 +42,6 @@ const PokemonList = () => {
             width={"23%"}
             data={pokemon}
             key={idx}
-            bgColor={Color.map((c) => c)}
           />
         ))}
     </div>
