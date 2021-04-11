@@ -19,7 +19,7 @@ const Pagination = (props) => {
     >
       <>
         <div
-          onClick={props.page <= 1 ? 1 : props.prev}
+          onClick={props.prev}
           style={{ cursor: "pointer" }}
         >
           <FontAwesomeIcon icon={faChevronLeft} />

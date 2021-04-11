@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { pokeball } from "../../assets";
 
 const Header = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <div
       style={{
