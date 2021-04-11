@@ -7,6 +7,7 @@ const GET_POKEMONS = gql`
       previous
       status
       results {
+        id
         url
         name
         image
