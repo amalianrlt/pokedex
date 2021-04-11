@@ -1,8 +1,17 @@
 import React from "react";
 import { Spacer } from "../../components";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
+import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
 
 const PokemonCard = (props) => {
+  // console.log(typeof props.data.name);
+  const { data } = useQuery(GET_POKEMON_DETAIL, {
+    variables: { name: props.data.name },
+  });
+
+  // console.log(data, "check");
+
   return (
     <div
       style={{
@@ -20,17 +29,17 @@ const PokemonCard = (props) => {
     >
       <Link
         to={{
-          pathname: `/detail/${props?.data?.id}-${props?.data?.name}`,
-          state: props.data,
+          pathname: `/detail/${data?.pokemon?.id}-${data?.pokemon?.name}`,
+          state: {image: props.data.image, data},
         }}
       >
         <div>
-          <h1 style={{ fontSize: "14px" }}>{props?.data?.name}</h1>
+          <h1 style={{ fontSize: "14px" }}>{data?.pokemon?.name}</h1>
           <Spacer />
           <div>
             <img
               src={props?.data?.image}
-              alt={props?.data?.name}
+              alt={data?.pokemon?.name}
               width="70"
               height="70"
             />
@@ -43,26 +52,19 @@ const PokemonCard = (props) => {
               justifyContent: "center",
             }}
           >
-            <div
-              style={{
-                backgroundColor: "#52D3B6",
-                borderRadius: 5,
-                padding: "3px 5px",
-                margin: "0 2px",
-              }}
-            >
-              <p style={{ fontSize: "9px" }}>Grass</p>
-            </div>
-            <div
-              style={{
-                backgroundColor: "#22D3B6",
-                borderRadius: 5,
-                padding: "3px 5px",
-                margin: "0 5px",
-              }}
-            >
-              <p style={{ fontSize: "9px" }}>Potion</p>
-            </div>
+            {data?.pokemon?.types?.map((type, idx) => (
+              <div
+                key={idx}
+                style={{
+                  backgroundColor: "#52D3B6",
+                  borderRadius: 5,
+                  padding: "3px 5px",
+                  margin: "0 2px",
+                }}
+              >
+                <p style={{ fontSize: "9px" }}>{type?.type?.name}</p>
+              </div>
+            ))}
           </div>
         </div>
       </Link>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import GET_POKEMONS from "../../graphql/getAllPokemons";
 import { PokemonCard } from "../../templates";
@@ -14,11 +14,14 @@ var Color = [
 ];
 
 const PokemonList = () => {
+  const [limit, setLimit] = useState(20);
+  const [offset, setOffset] = useState(0);
   const { data: { pokemons = [] } = {} } = useQuery(GET_POKEMONS, {
-    variables: { first: 9 },
+    variables: { limit: limit, offset: offset },
   });
 
-  // console.log(pokemons);
+
+  // console.log(pokemons?.results?.map((pokemon) => pokemon?.name));Î
   return (
     <div
       style={{

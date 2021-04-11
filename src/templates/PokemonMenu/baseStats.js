@@ -1,7 +1,7 @@
 import React from "react";
 
 const PokemonBaseStats = (props) => {
-  console.log(props.stats);
+  // console.log(props.stats);
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {props.stats?.map((stat, idx) => (

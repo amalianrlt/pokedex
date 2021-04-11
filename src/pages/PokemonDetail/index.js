@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
-import { useQuery } from "@apollo/react-hooks";
 import { Spacer } from "../../components";
 import {
   Header,
@@ -11,18 +9,12 @@ import {
 } from "../../templates";
 
 const PokemonDetail = (props) => {
-  const { data } = useQuery(GET_POKEMON_DETAIL, {
-    variables: { name: props.location.state.name },
-  });
-
   const [menu, setMenu] = useState({
     info: false,
     evolution: false,
     move: false,
     baseStats: true,
   });
-
-  console.log(data?.pokemon);
 
   return (
     <div
@@ -61,12 +53,12 @@ const PokemonDetail = (props) => {
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h2>{`#${data?.pokemon?.order}`}</h2>
+            <h2>{`#${props.location.state.data?.pokemon?.order}`}</h2>
             <Spacer />
             <h3>{props.location.state.name}</h3>
             <Spacer size={5} />
             <div style={{ flexDirection: "row", display: "flex" }}>
-              {data?.pokemon?.types?.map((type, idx) => (
+              {props.location.state.data?.pokemon?.types?.map((type, idx) => (
                 <div
                   key={idx}
                   style={{
@@ -153,10 +145,18 @@ const PokemonDetail = (props) => {
           padding: 20,
         }}
       >
-        {menu.info && <PokemonInfo pokemon={data?.pokemon} />}
-        {menu.evolution && <PokemonEvolution pokemon={data?.pokemon} />}
-        {menu.move && <PokemonMoves moves={data?.pokemon?.moves} />}
-        {menu.baseStats && <PokemonBaseStats stats={data?.pokemon?.stats} />}
+        {menu.info && (
+          <PokemonInfo pokemon={props.location.state.data?.pokemon} />
+        )}
+        {menu.evolution && (
+          <PokemonEvolution pokemon={props.location.state.data?.pokemon} />
+        )}
+        {menu.move && (
+          <PokemonMoves moves={props.location.state.data?.pokemon?.moves} />
+        )}
+        {menu.baseStats && (
+          <PokemonBaseStats stats={props.location.state.data?.pokemon?.stats} />
+        )}
       </div>
     </div>
   );
