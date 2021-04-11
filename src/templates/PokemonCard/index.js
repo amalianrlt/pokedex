@@ -3,7 +3,10 @@ import { Spacer } from "../../components";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
+import { Color } from "../../utils/Color";
 
+var typesColor = "#52D3B6";
+var bgColor = "#BEEFE4";
 const PokemonCard = (props) => {
   // console.log(typeof props.data.name);
   const { data } = useQuery(GET_POKEMON_DETAIL, {
@@ -15,26 +18,41 @@ const PokemonCard = (props) => {
   return (
     <div
       style={{
-        backgroundColor: "#BEEFE4",
+        backgroundColor: bgColor,
         width: props.width ?? "100px",
-        padding: 15,
+        margin: "4px",
         borderRadius: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        margin: "4px",
-        // height: 200,
       }}
     >
       <Link
         to={{
           pathname: `/detail/${data?.pokemon?.id}-${data?.pokemon?.name}`,
-          state: {image: props.data.image, data},
+          state: {
+            image: props.data.image,
+            data,
+            bgColor: bgColor,
+            typesColor: typesColor,
+          },
         }}
       >
-        <div>
-          <h1 style={{ fontSize: "14px" }}>{data?.pokemon?.name}</h1>
+        <div
+          style={{
+            padding: 15,
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "14px",
+              color: Color.black,
+              textAlign: "center",
+            }}
+          >
+            {data?.pokemon?.name}
+          </h1>
           <Spacer />
           <div>
             <img
@@ -56,7 +74,7 @@ const PokemonCard = (props) => {
               <div
                 key={idx}
                 style={{
-                  backgroundColor: "#52D3B6",
+                  backgroundColor: typesColor,
                   borderRadius: 5,
                   padding: "3px 5px",
                   margin: "0 2px",

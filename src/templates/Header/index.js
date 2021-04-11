@@ -2,8 +2,10 @@ import React from "react";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { pokeball } from "../../assets";
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props);
   return (
     <div
       style={{
@@ -11,14 +13,21 @@ const Header = () => {
         backgroundColor: "transparent",
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
         padding: 20,
       }}
     >
-      <Link to={"/"}>
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </Link>
-      <p>Pokemon's Detail</p>
-      <FontAwesomeIcon icon={faChevronLeft} />
+      {props.hasBack && (
+        <Link to={"/"}>
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </Link>
+      )}
+      <p>{props.title}</p>
+      {props.catchPokemon && (
+        <div onClick={props.catchPokemon} style={{ cursor: "pointer" }}>
+          <img src={pokeball} width={35} height={35} alt="pokeball" />
+        </div>
+      )}
     </div>
   );
 };

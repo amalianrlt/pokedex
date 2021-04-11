@@ -57,5 +57,9 @@ h5,
 h6,
 p {
   margin: 0;
-  font-family: 'Poppins';
+  font-family: "Poppins";
+}
+
+a {
+  text-decoration: none;
 }

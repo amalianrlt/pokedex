@@ -4,14 +4,14 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import {Color} from '../../utils/Color'
 
 const Pagination = (props) => {
   return (
     <div
       style={{
         display: "flex",
-        backgroundColor: "white",
+        backgroundColor: Color.lightGrey,
         flexDirection: "row",
         justifyContent: "space-between",
         padding: 20,
