@@ -9,7 +9,7 @@ import {
 } from "../../templates";
 
 const PokemonDetail = (props) => {
-  console.log(props.location.state);
+  // console.log(props.location.state);
   const catchPokemon = () => {
     const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
       pokemons(limit: $limit, offset: $offset) {

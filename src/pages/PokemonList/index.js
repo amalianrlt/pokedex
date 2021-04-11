@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import GET_POKEMONS from "../../graphql/getAllPokemons";
 import { PokemonCard, PokemonOwnedCard, Header } from "../../templates";
 import { Spacer, Pagination } from "../../components";
-import {Color} from "../../utils/Color";
+import { Color } from "../../utils/Color";
 
 // var Color = [
 //   "#BEEFE4",
@@ -17,7 +17,7 @@ import {Color} from "../../utils/Color";
 
 const PokemonList = () => {
   // console.log(Color);
-  const [limit, setLimit] = useState(20);
+  const [limit] = useState(20);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
   const { data: { pokemons = [] } = {} } = useQuery(GET_POKEMONS, {
@@ -44,10 +44,10 @@ const PokemonList = () => {
         marginLeft: "auto",
         marginRight: "auto",
         // minHeight: "100vh",
-        padding: '0 15px 15px 15px',
+        padding: "0 15px 15px 15px",
       }}
     >
-      <Header title={'Pokemon List'} />
+      <Header title={"Pokemon List"} />
       <PokemonOwnedCard />
       <Spacer size={20} />
       <div
