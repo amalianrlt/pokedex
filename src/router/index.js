@@ -7,7 +7,7 @@ const RouterPage= () => {
     <Switch>
       <Route path="/list" component={pages.MyPokemonList} exact />
       <Route path="/" component={pages.PokemonList} exact />
-      <Route path="/detail" component={pages.PokemonDetail} exact />
+      <Route path="/detail/:id-:name" component={pages.PokemonDetail} exact />
     </Switch>
   );
 };
