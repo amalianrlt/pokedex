@@ -17,7 +17,7 @@ const HomePageHeader = (props) => {
     >
       <div>
         <h1>The World</h1>
-        <h3>Pocket Monster</h3>
+        <h3>of Pocket Monster</h3>
       </div>
       <Link to="/owned">
         <div

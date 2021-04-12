@@ -66,7 +66,7 @@ const PokemonList = () => {
           backgroundColor: Color.lightGrey,
         }}
       >
-        {!loading ? (
+        {!loading && data ? (
           <>
             {/* <PokemonOwnedCard /> */}
             <div

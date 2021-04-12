@@ -146,26 +146,6 @@ const PokemonDetail = (props) => {
               Info
             </h5>
           </div>
-          {/* <div
-            style={{
-              cursor: "pointer",
-              color: menu.evolution
-                ? props.location.state.typesColor
-                : Color.black,
-              padding: "3px 15px",
-              borderRadius: 15,
-            }}
-            onClick={() =>
-              setMenu({
-                info: false,
-                evolution: true,
-                move: false,
-                baseStats: false,
-              })
-            }
-          >
-            <h5>Evolution</h5>
-          </div> */}
           <div
             style={{
               cursor: "pointer",

@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Spacer } from "../../components";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/react-hooks";
-import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
 import { Color } from "../../utils/Color";
 import Lottie from "react-lottie";
 import pikacu from "../../assets/animations/pikachu.json";
@@ -10,11 +8,8 @@ import pikacu from "../../assets/animations/pikachu.json";
 
 var typesColor = "#52D3B6";
 var bgColor = "#BEEFE4";
-const PokemonCard = (props) => {
-  const { data, loading } = useQuery(GET_POKEMON_DETAIL, {
-    variables: { name: props.data.name },
-  });
-
+const MyPokemonCard = (props) => {
+  const [loading] = useState(true);
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -42,13 +37,13 @@ const PokemonCard = (props) => {
         justifyContent: "center",
       }}
     >
-      {!loading ? (
+      {loading && props.data ? (
         <Link
           to={{
-            pathname: `/detail/${data?.pokemon?.id}-${data?.pokemon?.name}`,
+            pathname: `/detail/${props.data?.pokemon?.id}-${props.data?.pokemon?.name}`,
             state: {
               image: props.data.image,
-              data,
+              data: props.data,
               name: props.data.name,
               bgColor: bgColor,
               typesColor: typesColor,
@@ -67,13 +62,13 @@ const PokemonCard = (props) => {
                 textAlign: "center",
               }}
             >
-              {toUpperCase(data?.pokemon?.name)}
+              {toUpperCase(props.data?.name)}
             </h1>
             <Spacer />
             <div>
               <img
-                src={props?.data?.image}
-                alt={data?.pokemon?.name}
+                src={props?.data?.species?.url}
+                alt={props.data?.name}
                 width="70"
                 height="70"
               />
@@ -86,7 +81,7 @@ const PokemonCard = (props) => {
                 justifyContent: "center",
               }}
             >
-              {data?.pokemon?.types?.map((type, idx) => (
+              {props.data?.types?.map((type, idx) => (
                 <div
                   key={idx}
                   style={{
@@ -106,19 +101,19 @@ const PokemonCard = (props) => {
         </Link>
       ) : (
         <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              minHeight: "130px",
-            }}
-          >
-            <Lottie options={defaultOptions} height={50} width={50} />
-          </div>
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            minHeight: "130px",
+          }}
+        >
+          <Lottie options={defaultOptions} height={50} width={50} />
+        </div>
       )}
     </div>
   );
 };
 
-export default PokemonCard;
+export default MyPokemonCard;
