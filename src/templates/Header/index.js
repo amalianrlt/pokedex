@@ -3,6 +3,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { pokeball } from "../../assets";
+import { Color } from "../../utils/Color";
 
 const Header = (props) => {
   // console.log(props);
@@ -19,7 +20,7 @@ const Header = (props) => {
     >
       {props.hasBack && (
         <Link to={"/"}>
-          <FontAwesomeIcon icon={faChevronLeft} />
+          <FontAwesomeIcon icon={faChevronLeft} color={Color.black} />
         </Link>
       )}
       <p>{props.title}</p>

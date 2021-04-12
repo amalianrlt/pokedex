@@ -70,7 +70,7 @@ const PokemonCard = (props) => {
               {toUpperCase(data?.pokemon?.name)}
             </h1>
             <Spacer />
-            <div>
+            <div style={{textAlign:'center'}}>
               <img
                 src={props?.data?.image}
                 alt={data?.pokemon?.name}
@@ -96,7 +96,7 @@ const PokemonCard = (props) => {
                     margin: "0 2px",
                   }}
                 >
-                  <p style={{ fontSize: "9px" }}>
+                  <p style={{ fontSize: "9px", color: Color.black }}>
                     {toUpperCase(type?.type?.name)}
                   </p>
                 </div>

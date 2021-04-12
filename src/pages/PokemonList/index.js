@@ -22,7 +22,6 @@ const PokemonList = () => {
   const [limit] = useState(20);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
-  // const [loading, setLoading] = useState(true);
   const { data, loading } = useQuery(GET_POKEMONS, {
     variables: { limit: limit, offset: offset },
   });

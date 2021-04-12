@@ -11,7 +11,7 @@ const PokemonInfo = (props) => {
           padding: "10px 0",
         }}
       >
-        <p>Species</p>
+        <p style={{ fontSize: 14 }}>Species</p>
         <Spacer size={10} />
         <p>{props?.pokemon?.species?.name}</p>
       </div>
@@ -19,11 +19,20 @@ const PokemonInfo = (props) => {
         style={{
           borderBottom: `1px solid ${Color.lightGrey2}`,
           padding: "10px 0",
+          display: "flex",
+          justifyContent: "space-between",
         }}
       >
-        <p>Weight</p>
-        <Spacer size={10} />
-        <p>{props?.pokemon?.weight}</p>
+        <div style={{ display: "flex", flexDirection: "column", width:"50%" }}>
+          <p style={{ fontSize: 14 }}>Weight</p>
+          <Spacer size={10} />
+          <p>{props?.pokemon?.weight}</p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", width:"50%" }}>
+          <p style={{ fontSize: 14 }}>Height</p>
+          <Spacer size={10} />
+          <p>{props?.pokemon?.height}</p>
+        </div>
       </div>
       <div
         style={{
@@ -31,17 +40,7 @@ const PokemonInfo = (props) => {
           padding: "10px 0",
         }}
       >
-        <p>Height</p>
-        <Spacer size={10} />
-        <p>{props?.pokemon?.height}</p>
-      </div>
-      <div
-        style={{
-          borderBottom: `1px solid ${Color.lightGrey2}`,
-          padding: "10px 0",
-        }}
-      >
-        <p>Abilities</p>
+        <p style={{ fontSize: 14 }}>Abilities</p>
         <Spacer size={10} />
         <div style={{ flexDirection: "row", display: "flex" }}>
           {props?.pokemon?.abilities?.map((ability, idx) => (

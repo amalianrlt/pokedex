@@ -18,14 +18,26 @@ const Pagination = (props) => {
       }}
     >
       <>
-        <div onClick={props.prev} style={{ cursor: "pointer" }}>
-          <FontAwesomeIcon icon={faChevronLeft} />
+        <div
+          onClick={props.page === 1 ? null : props.prev}
+          style={{ cursor: props.page === 1 ? null : "pointer" }}
+        >
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            color={props.page === 1 ? Color.grey : Color.black}
+          />
         </div>
         <p>
           {props.page}/{props.total}
         </p>
-        <div onClick={props.next} style={{ cursor: "pointer" }}>
-          <FontAwesomeIcon icon={faChevronRight} />
+        <div
+          onClick={props.page === 56 ? null : props.next}
+          style={{ cursor: props.page === 56 ? null : "pointer" }}
+        >
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            color={props.page === 56 ? Color.grey : Color.black}
+          />
         </div>
       </>
     </div>

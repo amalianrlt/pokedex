@@ -7,17 +7,15 @@ const HomePageHeader = (props) => {
     <div
       style={{
         backgroundColor: "#FAE159",
-        padding: "15px 20px",
+        padding: "20px",
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "row",
-        // borderBottomLeftRadius: 20,
-        // borderBottomRightRadius: 20,
       }}
     >
       <div>
-        <h1>The World</h1>
-        <h3>of Pocket Monster</h3>
+        <h1 style={{ fontWeight: 900 }}>The World</h1>
+        <h3 style={{ fontWeight: 300 }}>of Pocket Monster</h3>
       </div>
       <Link to="/owned">
         <div
@@ -28,7 +26,7 @@ const HomePageHeader = (props) => {
           }}
         >
           <img src={child} width="60" height="60" alt="child" />
-          <h5 style={{marginTop:5}}>My Pokemon</h5>
+          <h5 style={{ marginTop: 5, color: '#E95555' }}>My Pokemon</h5>
         </div>
       </Link>
     </div>
