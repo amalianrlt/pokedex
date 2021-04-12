@@ -4,7 +4,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Color} from '../../utils/Color'
+import { Color } from "../../utils/Color";
 
 const Pagination = (props) => {
   return (
@@ -18,13 +18,12 @@ const Pagination = (props) => {
       }}
     >
       <>
-        <div
-          onClick={props.prev}
-          style={{ cursor: "pointer" }}
-        >
+        <div onClick={props.prev} style={{ cursor: "pointer" }}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </div>
-        <p>{props.page}</p>
+        <p>
+          {props.page}/{props.total}
+        </p>
         <div onClick={props.next} style={{ cursor: "pointer" }}>
           <FontAwesomeIcon icon={faChevronRight} />
         </div>

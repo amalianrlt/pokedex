@@ -1,18 +1,48 @@
 import React from "react";
+import { Spacer } from "../../components";
+import { Color } from "../../utils/Color";
 
 const PokemonInfo = (props) => {
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <div style={{ width: "40%" }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          borderBottom: `1px solid ${Color.lightGrey2}`,
+          padding: "10px 0",
+        }}
+      >
         <p>Species</p>
-        <p>Height</p>
-        <p>Weight</p>
-        <p>Abilities</p>
-      </div>
-      <div style={{ width: "60%" }}>
+        <Spacer size={10} />
         <p>{props?.pokemon?.species?.name}</p>
-        <p>{props?.pokemon?.height}</p>
+      </div>
+      <div
+        style={{
+          borderBottom: `1px solid ${Color.lightGrey2}`,
+          padding: "10px 0",
+        }}
+      >
+        <p>Weight</p>
+        <Spacer size={10} />
         <p>{props?.pokemon?.weight}</p>
+      </div>
+      <div
+        style={{
+          borderBottom: `1px solid ${Color.lightGrey2}`,
+          padding: "10px 0",
+        }}
+      >
+        <p>Height</p>
+        <Spacer size={10} />
+        <p>{props?.pokemon?.height}</p>
+      </div>
+      <div
+        style={{
+          borderBottom: `1px solid ${Color.lightGrey2}`,
+          padding: "10px 0",
+        }}
+      >
+        <p>Abilities</p>
+        <Spacer size={10} />
         <div style={{ flexDirection: "row", display: "flex" }}>
           {props?.pokemon?.abilities?.map((ability, idx) => (
             <p key={idx}>
@@ -22,7 +52,7 @@ const PokemonInfo = (props) => {
           ))}
         </div>
       </div>
-    
+      <Spacer />
     </div>
   );
 };

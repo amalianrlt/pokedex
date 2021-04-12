@@ -6,7 +6,7 @@ const PokemonOwnedCard = () => {
     <Link to={"/owned"}>
       <div
         style={{
-          margin: 4,
+          // margin: 4,
           display: "flex",
           backgroundColor: "wheat",
           height: 50,

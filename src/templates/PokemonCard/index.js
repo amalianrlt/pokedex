@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
 import { Color } from "../../utils/Color";
+// import { toUpperCase } from "../../utils/upperCase";
 
 var typesColor = "#52D3B6";
 var bgColor = "#BEEFE4";
@@ -14,6 +15,9 @@ const PokemonCard = (props) => {
   });
 
   // console.log(data, "check");
+  function toUpperCase(string) {
+    return string?.charAt(0)?.toUpperCase() + string?.slice(1);
+  }
 
   return (
     <div
@@ -34,6 +38,7 @@ const PokemonCard = (props) => {
           state: {
             image: props.data.image,
             data,
+            name: props.data.name,
             bgColor: bgColor,
             typesColor: typesColor,
           },
@@ -51,7 +56,7 @@ const PokemonCard = (props) => {
               textAlign: "center",
             }}
           >
-            {data?.pokemon?.name}
+            {toUpperCase(data?.pokemon?.name)}
           </h1>
           <Spacer />
           <div>
@@ -80,7 +85,9 @@ const PokemonCard = (props) => {
                   margin: "0 2px",
                 }}
               >
-                <p style={{ fontSize: "9px" }}>{type?.type?.name}</p>
+                <p style={{ fontSize: "9px" }}>
+                  {toUpperCase(type?.type?.name)}
+                </p>
               </div>
             ))}
           </div>

@@ -3,13 +3,13 @@ import { Spacer } from "../../components";
 import {
   Header,
   PokemonInfo,
-  PokemonEvolution,
   PokemonMoves,
   PokemonBaseStats,
 } from "../../templates";
+import { toUpperCase } from "../../utils/upperCase";
+import { Color } from "../../utils/Color";
 
 const PokemonDetail = (props) => {
-  // console.log(props.location.state);
   const catchPokemon = () => {
     const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
       pokemons(limit: $limit, offset: $offset) {
@@ -45,10 +45,9 @@ const PokemonDetail = (props) => {
   };
 
   const [menu, setMenu] = useState({
-    info: false,
-    evolution: false,
+    info: true,
     move: false,
-    baseStats: true,
+    baseStats: false,
   });
 
   return (
@@ -64,7 +63,7 @@ const PokemonDetail = (props) => {
       <Header
         catchPokemon={catchPokemon}
         hasBack={true}
-        title={"Pokemon Detail"}
+        title={"Detail"}
       />
       <div
         style={{
@@ -94,7 +93,7 @@ const PokemonDetail = (props) => {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <h2>{`#${props.location.state.data?.pokemon?.order}`}</h2>
             <Spacer />
-            <h3>{props.location.state.name}</h3>
+            <h3>{toUpperCase(props.location.state.name)}</h3>
             <Spacer size={5} />
             <div style={{ flexDirection: "row", display: "flex" }}>
               {props.location.state.data?.pokemon?.types?.map((type, idx) => (
@@ -107,7 +106,9 @@ const PokemonDetail = (props) => {
                     margin: "0 2px",
                   }}
                 >
-                  <p style={{ fontSize: "12px" }}>{type.type.name}</p>
+                  <p style={{ fontSize: "12px" }}>
+                    {toUpperCase(type.type.name)}
+                  </p>
                 </div>
               ))}
             </div>
@@ -124,29 +125,33 @@ const PokemonDetail = (props) => {
           <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.info
-                ? props.location.state.typesColor
-                : "transparent",
               padding: "3px 15px",
               borderRadius: 15,
             }}
             onClick={() =>
               setMenu({
                 info: true,
-                evolution: false,
                 move: false,
                 baseStats: false,
               })
             }
           >
-            <h5>Info</h5>
+            <h5
+              style={{
+                color: menu.info
+                  ? props.location.state.typesColor
+                  : Color.black,
+              }}
+            >
+              Info
+            </h5>
           </div>
-          <div
+          {/* <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.evolution
+              color: menu.evolution
                 ? props.location.state.typesColor
-                : "transparent",
+                : Color.black,
               padding: "3px 15px",
               borderRadius: 15,
             }}
@@ -160,46 +165,54 @@ const PokemonDetail = (props) => {
             }
           >
             <h5>Evolution</h5>
-          </div>
+          </div> */}
           <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.move
-                ? props.location.state.typesColor
-                : "transparent",
               padding: "3px 15px",
               borderRadius: 15,
             }}
             onClick={() =>
               setMenu({
                 info: false,
-                evolution: false,
                 move: true,
                 baseStats: false,
               })
             }
           >
-            <h5>Move</h5>
+            <h5
+              style={{
+                color: menu.move
+                  ? props.location.state.typesColor
+                  : Color.black,
+              }}
+            >
+              Move
+            </h5>
           </div>
           <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.baseStats
-                ? props.location.state.typesColor
-                : "transparent",
               padding: "3px 15px",
               borderRadius: 15,
             }}
             onClick={() =>
               setMenu({
                 info: false,
-                evolution: false,
                 move: false,
                 baseStats: true,
               })
             }
           >
-            <h5>Base State</h5>
+            <h5
+              style={{
+                color: menu.baseStats
+                  ? props.location.state.typesColor
+                  : Color.black,
+              }}
+            >
+              Base State
+            </h5>
           </div>
         </div>
       </div>
@@ -214,9 +227,6 @@ const PokemonDetail = (props) => {
       >
         {menu.info && (
           <PokemonInfo pokemon={props.location.state.data?.pokemon} />
-        )}
-        {menu.evolution && (
-          <PokemonEvolution pokemon={props.location.state.data?.pokemon} />
         )}
         {menu.move && (
           <PokemonMoves moves={props.location.state.data?.pokemon?.moves} />
