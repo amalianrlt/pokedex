@@ -3,52 +3,81 @@ import { Spacer } from "../../components";
 import {
   Header,
   PokemonInfo,
-  PokemonEvolution,
   PokemonMoves,
   PokemonBaseStats,
 } from "../../templates";
+import { toUpperCase } from "../../utils/upperCase";
+import { Color } from "../../utils/Color";
 
 const PokemonDetail = (props) => {
-  // console.log(props.location.state);
-  const catchPokemon = () => {
-    const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
-      pokemons(limit: $limit, offset: $offset) {
-        count
-        next
-        previous
-        status
-        message
-        results {
-          url
-          name
-          image
-        }
-      }
-    }`;
+  const [setIsLoading] = useState(true);
+  const [catchingPokemon, setCatchingPokemon] = useState(null);
 
-    const gqlVariables = {
-      limit: 2,
-      offset: 1,
-    };
+  const postData = async (name) => {
+    const url = "https://mypokemon-api.herokuapp.com/api/myPokemon";
 
-    fetch("https://graphql-pokeapi.vercel.app/api/graphql", {
-      credentials: "omit",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: gqlQuery,
-        variables: gqlVariables,
-      }),
+    await fetch(url, {
       method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+      }),
     })
-      .then((res) => console.log(res.json()))
-      .then((res) => console.log("Response from server", res));
+      .then((response) => response.status)
+      .then((res) => {
+        console.log(res);
+
+        if (res === 200) {
+          setIsLoading(false);
+          // setIsOffline({
+          //   ...isOffline,
+          //   notification: false,
+          //   reload: false,
+          // });
+        } else {
+          setIsLoading(false);
+          // setIsFailed(true);
+          // setIsOffline({
+          //   ...isOffline,
+          //   notification: false,
+          //   reload: false,
+          // });
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        setIsLoading(false);
+      });
+  };
+
+  const catchPokemon = async (e) => {
+    e.preventDefault();
+
+    setCatchingPokemon(Math.random() < 0.5);
+
+    if (catchingPokemon === true) {
+      let nick = prompt("You got a pokemon, give him a name!");
+      let nickname = "";
+      if (nick === null || nick === "") {
+        nickname = "Pikatchu";
+      } else {
+        nickname = nick;
+      }
+      await postData(nickname);
+    } else {
+      alert("Try Again", {
+        title: "Failed:(",
+      });
+    }
   };
 
   const [menu, setMenu] = useState({
-    info: false,
-    evolution: false,
+    info: true,
     move: false,
-    baseStats: true,
+    baseStats: false,
   });
 
   return (
@@ -62,9 +91,9 @@ const PokemonDetail = (props) => {
       }}
     >
       <Header
-        catchPokemon={catchPokemon}
+        catchPokemon={(e) => catchPokemon(e)}
         hasBack={true}
-        title={"Pokemon Detail"}
+        title={"Detail"}
       />
       <div
         style={{
@@ -92,9 +121,11 @@ const PokemonDetail = (props) => {
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h2>{`#${props.location.state.data?.pokemon?.order}`}</h2>
+            <h2
+              style={{ fontWeight: 300 }}
+            >{`#${props.location.state.data?.pokemon?.order}`}</h2>
             <Spacer />
-            <h3>{props.location.state.name}</h3>
+            <h3>{toUpperCase(props.location.state.name)}</h3>
             <Spacer size={5} />
             <div style={{ flexDirection: "row", display: "flex" }}>
               {props.location.state.data?.pokemon?.types?.map((type, idx) => (
@@ -104,10 +135,12 @@ const PokemonDetail = (props) => {
                     backgroundColor: props.location.state.typesColor,
                     borderRadius: 5,
                     padding: "3px 5px",
-                    margin: "0 2px",
+                    margin: "0 7px 0 0",
                   }}
                 >
-                  <p style={{ fontSize: "12px" }}>{type.type.name}</p>
+                  <p style={{ fontSize: "12px" }}>
+                    {toUpperCase(type.type.name)}
+                  </p>
                 </div>
               ))}
             </div>
@@ -119,87 +152,87 @@ const PokemonDetail = (props) => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-around",
+            marginBottom: 10,
           }}
         >
           <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.info
-                ? props.location.state.typesColor
-                : "transparent",
               padding: "3px 15px",
-              borderRadius: 15,
+              borderBottom:
+                menu.info && `2px solid ${props.location.state.typesColor}`,
             }}
             onClick={() =>
               setMenu({
                 info: true,
-                evolution: false,
                 move: false,
                 baseStats: false,
               })
             }
           >
-            <h5>Info</h5>
+            <h5
+              style={{
+                fontSize: 18,
+                color: menu.info
+                  ? props.location.state.typesColor
+                  : Color.black,
+              }}
+            >
+              Info
+            </h5>
           </div>
           <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.evolution
-                ? props.location.state.typesColor
-                : "transparent",
               padding: "3px 15px",
-              borderRadius: 15,
+              borderBottom:
+                menu.move && `2px solid ${props.location.state.typesColor}`,
             }}
             onClick={() =>
               setMenu({
                 info: false,
-                evolution: true,
-                move: false,
-                baseStats: false,
-              })
-            }
-          >
-            <h5>Evolution</h5>
-          </div>
-          <div
-            style={{
-              cursor: "pointer",
-              backgroundColor: menu.move
-                ? props.location.state.typesColor
-                : "transparent",
-              padding: "3px 15px",
-              borderRadius: 15,
-            }}
-            onClick={() =>
-              setMenu({
-                info: false,
-                evolution: false,
                 move: true,
                 baseStats: false,
               })
             }
           >
-            <h5>Move</h5>
+            <h5
+              style={{
+                fontSize: 18,
+                color: menu.move
+                  ? props.location.state.typesColor
+                  : Color.black,
+              }}
+            >
+              Move
+            </h5>
           </div>
           <div
             style={{
               cursor: "pointer",
-              backgroundColor: menu.baseStats
-                ? props.location.state.typesColor
-                : "transparent",
               padding: "3px 15px",
-              borderRadius: 15,
+              borderBottom:
+                menu.baseStats &&
+                `2px solid ${props.location.state.typesColor}`,
             }}
             onClick={() =>
               setMenu({
                 info: false,
-                evolution: false,
                 move: false,
                 baseStats: true,
               })
             }
           >
-            <h5>Base State</h5>
+            <h5
+              style={{
+                fontSize: 18,
+                color: menu.baseStats
+                  ? props.location.state.typesColor
+                  : Color.black,
+              }}
+            >
+              Base State
+            </h5>
           </div>
         </div>
       </div>
@@ -214,9 +247,6 @@ const PokemonDetail = (props) => {
       >
         {menu.info && (
           <PokemonInfo pokemon={props.location.state.data?.pokemon} />
-        )}
-        {menu.evolution && (
-          <PokemonEvolution pokemon={props.location.state.data?.pokemon} />
         )}
         {menu.move && (
           <PokemonMoves moves={props.location.state.data?.pokemon?.moves} />
