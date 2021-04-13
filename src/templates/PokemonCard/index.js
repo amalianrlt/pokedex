@@ -33,7 +33,7 @@ const PokemonCard = (props) => {
     <div
       style={{
         backgroundColor: bgColor,
-        width: props.width ?? "100px",
+        width: props.width ?? "140px",
         margin: "4px",
         borderRadius: 8,
         display: "flex",
@@ -42,6 +42,7 @@ const PokemonCard = (props) => {
         justifyContent: "center",
       }}
     >
+      
       {!loading ? (
         <Link
           to={{

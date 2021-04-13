@@ -83,8 +83,8 @@ const PokemonDetail = (props) => {
   return (
     <div
       style={{
-        width: "375px",
-        backgroundColor: props.location.state.bgColor,
+        // width: "375px",
+        backgroundColor: props?.location?.state?.bgColor,
         marginLeft: "auto",
         marginRight: "auto",
         minHeight: "100vh",
@@ -114,8 +114,8 @@ const PokemonDetail = (props) => {
         >
           <div>
             <img
-              src={props.location.state.image}
-              alt={props.location.state.name}
+              src={props?.location?.state?.image}
+              alt={props?.location?.state?.name}
               width="150"
               height="150"
             />
@@ -123,23 +123,23 @@ const PokemonDetail = (props) => {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <h2
               style={{ fontWeight: 300 }}
-            >{`#${props.location.state.data?.pokemon?.order}`}</h2>
+            >{`#${props?.location?.state?.data?.pokemon?.order}`}</h2>
             <Spacer />
-            <h3>{toUpperCase(props.location.state.name)}</h3>
+            <h3>{toUpperCase(props?.location?.state?.name)}</h3>
             <Spacer size={5} />
             <div style={{ flexDirection: "row", display: "flex" }}>
-              {props.location.state.data?.pokemon?.types?.map((type, idx) => (
+              {props?.location?.state?.data?.pokemon?.types?.map((type, idx) => (
                 <div
                   key={idx}
                   style={{
-                    backgroundColor: props.location.state.typesColor,
+                    backgroundColor: props?.location?.state?.typesColor,
                     borderRadius: 5,
                     padding: "3px 5px",
                     margin: "0 7px 0 0",
                   }}
                 >
                   <p style={{ fontSize: "12px" }}>
-                    {toUpperCase(type.type.name)}
+                    {toUpperCase(type?.type?.name)}
                   </p>
                 </div>
               ))}
@@ -160,7 +160,7 @@ const PokemonDetail = (props) => {
               cursor: "pointer",
               padding: "3px 15px",
               borderBottom:
-                menu.info && `2px solid ${props.location.state.typesColor}`,
+                menu.info && `2px solid ${props?.location?.state?.typesColor}`,
             }}
             onClick={() =>
               setMenu({
@@ -174,7 +174,7 @@ const PokemonDetail = (props) => {
               style={{
                 fontSize: 18,
                 color: menu.info
-                  ? props.location.state.typesColor
+                  ? props?.location?.state?.typesColor
                   : Color.black,
               }}
             >
@@ -186,7 +186,7 @@ const PokemonDetail = (props) => {
               cursor: "pointer",
               padding: "3px 15px",
               borderBottom:
-                menu.move && `2px solid ${props.location.state.typesColor}`,
+                menu.move && `2px solid ${props?.location?.state?.typesColor}`,
             }}
             onClick={() =>
               setMenu({
@@ -200,7 +200,7 @@ const PokemonDetail = (props) => {
               style={{
                 fontSize: 18,
                 color: menu.move
-                  ? props.location.state.typesColor
+                  ? props?.location?.state?.typesColor
                   : Color.black,
               }}
             >
@@ -213,7 +213,7 @@ const PokemonDetail = (props) => {
               padding: "3px 15px",
               borderBottom:
                 menu.baseStats &&
-                `2px solid ${props.location.state.typesColor}`,
+                `2px solid ${props?.location?.state?.typesColor}`,
             }}
             onClick={() =>
               setMenu({
@@ -227,7 +227,7 @@ const PokemonDetail = (props) => {
               style={{
                 fontSize: 18,
                 color: menu.baseStats
-                  ? props.location.state.typesColor
+                  ? props?.location?.state?.typesColor
                   : Color.black,
               }}
             >
@@ -246,13 +246,13 @@ const PokemonDetail = (props) => {
         }}
       >
         {menu.info && (
-          <PokemonInfo pokemon={props.location.state.data?.pokemon} />
+          <PokemonInfo pokemon={props?.location?.state?.data?.pokemon} />
         )}
         {menu.move && (
-          <PokemonMoves moves={props.location.state.data?.pokemon?.moves} />
+          <PokemonMoves moves={props?.location?.state?.data?.pokemon?.moves} />
         )}
         {menu.baseStats && (
-          <PokemonBaseStats stats={props.location.state.data?.pokemon?.stats} />
+          <PokemonBaseStats stats={props?.location?.state?.data?.pokemon?.stats} />
         )}
       </div>
     </div>
