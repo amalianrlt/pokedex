@@ -7,6 +7,8 @@ import { Color } from "../../utils/Color";
 import Lottie from "react-lottie";
 import pikacu from "../../assets/animations/pikachu.json";
 
+import { Col } from "reactstrap";
+
 // var Colors = [
 //   "#BEEFE4",
 //   "#C9C9EF",
@@ -18,7 +20,6 @@ import pikacu from "../../assets/animations/pikachu.json";
 // ];
 
 const PokemonList = () => {
-  // console.log(Color);
   const [limit] = useState(20);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
@@ -49,17 +50,17 @@ const PokemonList = () => {
   return (
     <div
       style={{
-        width: "375px",
+        // width: "375px",
         backgroundColor: "#FAE159",
         marginLeft: "auto",
         marginRight: "auto",
-        // minHeight: "100vh",
+        minHeight: "100vh",
       }}
     >
       <HomePageHeader />
       <div
         style={{
-          padding: "20px 15px",
+          padding: "20px 20px",
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           backgroundColor: Color.lightGrey,
@@ -76,7 +77,7 @@ const PokemonList = () => {
               }}
             >
               <h4 style={{ fontWeight: 300 }}>
-                List of pokemons ({data.pokemons.count})
+                List of pokemons ({data?.pokemons?.count})
               </h4>
             </div>
             <div
@@ -89,7 +90,9 @@ const PokemonList = () => {
             >
               {data?.pokemons &&
                 data?.pokemons?.results?.map((pokemon, idx) => (
-                  <PokemonCard width={"31%"} data={pokemon} key={idx} />
+                  <Col sm="3" lg="5" md="4" key={idx}>
+                    <PokemonCard data={pokemon}  />
+                  </Col>
                 ))}
             </div>
             <Pagination

@@ -6,6 +6,7 @@ import pikacu from "../../assets/animations/pikachu.json";
 import { Color } from "../../utils/Color";
 import { child } from "../../assets";
 import { Spacer } from "../../components";
+import { Col } from "reactstrap";
 
 const MyPokemonList = () => {
   const [loading, setIsLoading] = useState(true);
@@ -31,20 +32,9 @@ const MyPokemonList = () => {
 
         if (res === 200) {
           setMyPokemonList(data.result);
-          // data.data?.map(() => dataRef.push(React.createRef()));
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
           setIsLoading(false);
         } else {
           setIsLoading(false);
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         }
       })
       .catch((error) => {
@@ -73,23 +63,10 @@ const MyPokemonList = () => {
     })
       .then((response) => response.status)
       .then((res) => {
-        // console.log(res);
-
         if (res === 200) {
           setIsLoading(false);
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         } else {
           setIsLoading(false);
-          // setIsFailed(true);
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         }
       })
       .catch((error) => {
@@ -100,21 +77,24 @@ const MyPokemonList = () => {
 
   const catchPokemon = async (e) => {
     e.preventDefault();
-
     setCatchingPokemon(Math.random() < 0.5);
 
     if (catchingPokemon === true) {
-      let nick = prompt("You got a pokemon, give him a name!");
+      let names = myPokemonList?.map((a) => a.name);
+      let pokemonName = prompt("You got a pokemon, give him a name!");
       let nickname = "";
-      if (nick === null || nick === "") {
+      if (names.indexOf(nickname) === -1) {
+        prompt("Please give another name");
+      } else if (pokemonName === null || pokemonName === "") {
         nickname = "Pikatchu";
       } else {
-        nickname = nick;
+        nickname = pokemonName;
+        await postData(nickname);
+        getData();
       }
-      await postData(nickname);
     } else {
       alert("Try Again", {
-        title: "Failed:(",
+        title: "Fokemon run away!",
       });
     }
   };
@@ -131,24 +111,11 @@ const MyPokemonList = () => {
     })
       .then((response) => response.status)
       .then((res) => {
-        // console.log(res);
-
         if (res === 200) {
           setIsLoading(false);
           getData();
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         } else {
           setIsLoading(false);
-          // setIsFailed(true);
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         }
       })
       .catch((error) => {
@@ -190,7 +157,7 @@ const MyPokemonList = () => {
   return (
     <div
       style={{
-        width: "375px",
+        // width: "375px",
         backgroundColor: "#FAE159",
         marginLeft: "auto",
         marginRight: "auto",
@@ -235,12 +202,14 @@ const MyPokemonList = () => {
           >
             {myPokemonList.length > 1 ? (
               myPokemonList?.map((pokemon, idx) => (
-                <MyPokemonCard
-                  width={"31%"}
-                  data={pokemon}
-                  key={idx}
-                  deletePokemon={(e) => deletePokemon(pokemon.id, e)}
-                />
+                <Col sm="3" lg="5" md="4" key={idx}>
+                  <MyPokemonCard
+                    width={"31%"}
+                    data={pokemon}
+                    // key={idx}
+                    deletePokemon={(e) => deletePokemon(pokemon.id, e)}
+                  />
+                </Col>
               ))
             ) : (
               <div
