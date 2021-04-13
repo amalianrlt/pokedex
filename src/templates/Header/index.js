@@ -22,9 +22,9 @@ const Header = (props) => {
           <FontAwesomeIcon icon={faChevronLeft} color={Color.black} />
         </Link>
       )}
-      <p>{props.title}</p>
-      {props.catchPokemon && (
-        <div onClick={props.catchPokemon} style={{ cursor: "pointer" }}>
+      <p>{props?.title}</p>
+      {props?.catchPokemon && (
+        <div onClick={props?.catchPokemon} style={{ cursor: "pointer" }}>
           <img src={pokeball} width={35} height={35} alt="pokeball" />
         </div>
       )}

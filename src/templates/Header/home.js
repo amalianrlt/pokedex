@@ -2,7 +2,7 @@ import React from "react";
 import { child } from "../../assets";
 import { Link } from "react-router-dom";
 
-const HomePageHeader = (props) => {
+const HomePageHeader = () => {
   return (
     <div
       style={{
