@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header, MyPokemonCard } from "../../templates";
-
+import Swal from "sweetalert2";
 import Lottie from "react-lottie";
 import pikacu from "../../assets/animations/pikachu.json";
 import { Color } from "../../utils/Color";
@@ -73,7 +73,7 @@ const MyPokemonList = () => {
     })
       .then((response) => response.status)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
 
         if (res === 200) {
           setIsLoading(false);
@@ -99,7 +99,6 @@ const MyPokemonList = () => {
   };
 
   const catchPokemon = async (e) => {
-    console.log("catch");
     e.preventDefault();
 
     setCatchingPokemon(Math.random() < 0.5);
@@ -118,6 +117,62 @@ const MyPokemonList = () => {
         title: "Failed:(",
       });
     }
+  };
+
+  const deleteData = async (id) => {
+    const url = `https://mypokemon-api.herokuapp.com/api/myPokemon/${id}`;
+
+    await fetch(url, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.status)
+      .then((res) => {
+        // console.log(res);
+
+        if (res === 200) {
+          setIsLoading(false);
+          getData();
+          // setIsOffline({
+          //   ...isOffline,
+          //   notification: false,
+          //   reload: false,
+          // });
+        } else {
+          setIsLoading(false);
+          // setIsFailed(true);
+          // setIsOffline({
+          //   ...isOffline,
+          //   notification: false,
+          //   reload: false,
+          // });
+        }
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        setIsLoading(false);
+      });
+  };
+
+  const deletePokemon = async (id, e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteData(id);
+        Swal.fire("Deleted!", "Your Pokemon has been deleted.", "success");
+      }
+    });
   };
 
   useEffect(() => {
@@ -178,10 +233,27 @@ const MyPokemonList = () => {
               justifyContent: "flex-start",
             }}
           >
-            {myPokemonList &&
+            {myPokemonList.length > 1 ? (
               myPokemonList?.map((pokemon, idx) => (
-                <MyPokemonCard width={"31%"} data={pokemon} key={idx} />
-              ))}
+                <MyPokemonCard
+                  width={"31%"}
+                  data={pokemon}
+                  key={idx}
+                  deletePokemon={(e) => deletePokemon(pokemon.id, e)}
+                />
+              ))
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>Kamu belum punya pokemon, yuk cari</p>
+              </div>
+            )}
           </div>
         ) : (
           <div

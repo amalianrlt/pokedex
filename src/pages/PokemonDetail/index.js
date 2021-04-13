@@ -10,7 +10,7 @@ import { toUpperCase } from "../../utils/upperCase";
 import { Color } from "../../utils/Color";
 
 const PokemonDetail = (props) => {
-  const [loading, setIsLoading] = useState(true);
+  const [setIsLoading] = useState(true);
   const [catchingPokemon, setCatchingPokemon] = useState(null);
 
   const postData = async (name) => {
@@ -54,7 +54,6 @@ const PokemonDetail = (props) => {
   };
 
   const catchPokemon = async (e) => {
-    console.log("catch");
     e.preventDefault();
 
     setCatchingPokemon(Math.random() < 0.5);
