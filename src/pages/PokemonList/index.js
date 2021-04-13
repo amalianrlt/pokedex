@@ -69,7 +69,6 @@ const PokemonList = () => {
       >
         {!loading && data ? (
           <>
-            {/* <PokemonOwnedCard /> */}
             <div
               style={{
                 display: "flex",

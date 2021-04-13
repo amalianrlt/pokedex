@@ -170,7 +170,7 @@ const MyPokemonList = () => {
       >
         <img src={child} width="100" height="100" alt="child" />
         <Spacer />
-        <p>My Pokemon ({myPokemonList?.length})</p>
+        {myPokemonList?.length && <p>My Pokemon ({myPokemonList?.length})</p>}
       </div>
       <Spacer />
       <div
