@@ -6,7 +6,6 @@ import { pokeball } from "../../assets";
 import { Color } from "../../utils/Color";
 
 const Header = (props) => {
-  // console.log(props);
   return (
     <div
       style={{

@@ -32,19 +32,8 @@ const PokemonDetail = (props) => {
 
         if (res === 200) {
           setIsLoading(false);
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         } else {
           setIsLoading(false);
-          // setIsFailed(true);
-          // setIsOffline({
-          //   ...isOffline,
-          //   notification: false,
-          //   reload: false,
-          // });
         }
       })
       .catch((error) => {

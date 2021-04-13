@@ -24,7 +24,6 @@ const MyPokemonCard = (props) => {
     <div
       style={{
         backgroundColor: bgColor,
-        // width: props.width ?? "100px",
         margin: "4px",
         borderRadius: 8,
         display: "flex",
