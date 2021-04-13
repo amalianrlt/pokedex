@@ -7,7 +7,7 @@ const PokemonInfo = (props) => {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div
         style={{
-          borderBottom: `1px solid ${Color.lightGrey2}`,
+          borderBottom: `1px solid ${Color.grey}`,
           padding: "10px 0",
         }}
       >
@@ -17,7 +17,7 @@ const PokemonInfo = (props) => {
       </div>
       <div
         style={{
-          borderBottom: `1px solid ${Color.lightGrey2}`,
+          borderBottom: `1px solid ${Color.grey}`,
           padding: "10px 0",
           display: "flex",
           justifyContent: "space-between",
@@ -36,7 +36,7 @@ const PokemonInfo = (props) => {
       </div>
       <div
         style={{
-          borderBottom: `1px solid ${Color.lightGrey2}`,
+          borderBottom: `1px solid ${Color.grey}`,
           padding: "10px 0",
         }}
       >

@@ -9,16 +9,18 @@ import pikacu from "../../assets/animations/pikachu.json";
 
 import { Col } from "reactstrap";
 
-// var Colors = [
-//   "#BEEFE4",
-//   "#C9C9EF",
-//   "#FFB0AC",
-//   "#FFEE8E",
-//   "#C7E5A2",
-//   "#FBD4B6",
-//   "#E6E6F1",
-// ];
+const cardColor = "#BEEFE4-#C9C9EF-#FFB0AC-#FFEE8E-#C7E5A2-#FBD4B6-#E6E6F1-#FFC3D6-#EDDFD6-#DDFEBB"
+  .split("-")
+  .map((value) => ({
+    value,
+  }));
 
+const typeColor = "#52D3B6-#A2A2EA-#FC716A-#FDD604-#9ABB73-#FC9E69-#CDCDD5-#F56F9A-#D7BBA9-#A1EC55"
+  .split("-")
+  .map((value) => ({
+    value,
+  }));
+  
 const PokemonList = () => {
   const [limit] = useState(20);
   const [offset, setOffset] = useState(0);
@@ -91,7 +93,11 @@ const PokemonList = () => {
               {data?.pokemons &&
                 data?.pokemons?.results?.map((pokemon, idx) => (
                   <Col sm="3" lg="5" md="4" key={idx}>
-                    <PokemonCard data={pokemon}  />
+                    <PokemonCard
+                      data={pokemon}
+                      bgCardColor={cardColor[idx.toString()?.slice(-1)]}
+                      typeColor={typeColor[idx.toString()?.slice(-1)]}
+                    />
                   </Col>
                 ))}
             </div>

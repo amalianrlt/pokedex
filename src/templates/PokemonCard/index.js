@@ -6,10 +6,7 @@ import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
 import { Color } from "../../utils/Color";
 import Lottie from "react-lottie";
 import pikacu from "../../assets/animations/pikachu.json";
-// import { toUpperCase } from "../../utils/upperCase";
 
-var typesColor = "#52D3B6";
-var bgColor = "#BEEFE4";
 const PokemonCard = (props) => {
   const { data, loading } = useQuery(GET_POKEMON_DETAIL, {
     variables: { name: props.data.name },
@@ -32,7 +29,7 @@ const PokemonCard = (props) => {
   return (
     <div
       style={{
-        backgroundColor: bgColor,
+        backgroundColor: props?.bgCardColor?.value,
         width: props.width ?? "140px",
         margin: "4px",
         borderRadius: 8,
@@ -51,8 +48,8 @@ const PokemonCard = (props) => {
               image: props.data.image,
               data,
               name: props.data.name,
-              bgColor: bgColor,
-              typesColor: typesColor,
+              bgCardColor: props?.bgCardColor?.value,
+              typeColor: props?.typeColor?.value,
             },
           }}
         >
@@ -91,7 +88,7 @@ const PokemonCard = (props) => {
                 <div
                   key={idx}
                   style={{
-                    backgroundColor: typesColor,
+                    backgroundColor: props?.typeColor?.value,
                     borderRadius: 5,
                     padding: "3px 5px",
                     margin: "0 2px",
