@@ -83,177 +83,186 @@ const PokemonDetail = (props) => {
   return (
     <div
       style={{
-        // width: "375px",
-        backgroundColor: props?.location?.state?.bgColor,
+        backgroundColor: Color.lightGrey2,
         marginLeft: "auto",
         marginRight: "auto",
         minHeight: "100vh",
       }}
     >
-      <Header
-        catchPokemon={(e) => catchPokemon(e)}
-        hasBack={true}
-        title={"Detail"}
-      />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "wrap",
-          padding: "20px 20px 0 20px",
-          justifyContent: "space-between",
-        }}
-      >
+      <div style={{backgroundColor: props?.location?.state?.bgCardColor,}}>
+        <Header
+          catchPokemon={(e) => catchPokemon(e)}
+          hasBack={true}
+          title={"Detail"}
+        />
         <div
           style={{
             display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly",
+            flexDirection: "column",
+            flexWrap: "wrap",
+            padding: "20px 20px 0 20px",
+            justifyContent: "space-between",
           }}
         >
-          <div>
-            <img
-              src={props?.location?.state?.image}
-              alt={props?.location?.state?.name}
-              width="150"
-              height="150"
-            />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <div>
+              <img
+                src={props?.location?.state?.image}
+                alt={props?.location?.state?.name}
+                width="150"
+                height="150"
+              />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <h2
+                style={{ fontWeight: 300 }}
+              >{`#${props?.location?.state?.data?.pokemon?.order}`}</h2>
+              <Spacer />
+              <h3>{toUpperCase(props?.location?.state?.name)}</h3>
+              <Spacer size={5} />
+              <div style={{ flexDirection: "row", display: "flex" }}>
+                {props?.location?.state?.data?.pokemon?.types?.map(
+                  (type, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        backgroundColor: props?.location?.state?.typeColor,
+                        borderRadius: 5,
+                        padding: "3px 5px",
+                        margin: "0 7px 0 0",
+                      }}
+                    >
+                      <p style={{ fontSize: "12px" }}>
+                        {toUpperCase(type?.type?.name)}
+                      </p>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <h2
-              style={{ fontWeight: 300 }}
-            >{`#${props?.location?.state?.data?.pokemon?.order}`}</h2>
-            <Spacer />
-            <h3>{toUpperCase(props?.location?.state?.name)}</h3>
-            <Spacer size={5} />
-            <div style={{ flexDirection: "row", display: "flex" }}>
-              {props?.location?.state?.data?.pokemon?.types?.map((type, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    backgroundColor: props?.location?.state?.typesColor,
-                    borderRadius: 5,
-                    padding: "3px 5px",
-                    margin: "0 7px 0 0",
-                  }}
-                >
-                  <p style={{ fontSize: "12px" }}>
-                    {toUpperCase(type?.type?.name)}
-                  </p>
-                </div>
-              ))}
+          <Spacer size={30} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 10,
+            }}
+          >
+            <div
+              style={{
+                cursor: "pointer",
+                padding: "3px 15px",
+                borderBottom:
+                  menu.info && `2px solid ${props?.location?.state?.typeColor}`,
+              }}
+              onClick={() =>
+                setMenu({
+                  info: true,
+                  move: false,
+                  baseStats: false,
+                })
+              }
+            >
+              <h5
+                style={{
+                  fontSize: 18,
+                  color: menu.info
+                    ? props?.location?.state?.typeColor
+                    : Color.black,
+                }}
+              >
+                Info
+              </h5>
+            </div>
+            <div
+              style={{
+                cursor: "pointer",
+                padding: "3px 15px",
+                borderBottom:
+                  menu.move && `2px solid ${props?.location?.state?.typeColor}`,
+              }}
+              onClick={() =>
+                setMenu({
+                  info: false,
+                  move: true,
+                  baseStats: false,
+                })
+              }
+            >
+              <h5
+                style={{
+                  fontSize: 18,
+                  color: menu.move
+                    ? props?.location?.state?.typeColor
+                    : Color.black,
+                }}
+              >
+                Move
+              </h5>
+            </div>
+            <div
+              style={{
+                cursor: "pointer",
+                padding: "3px 15px",
+                borderBottom:
+                  menu.baseStats &&
+                  `2px solid ${props?.location?.state?.typeColor}`,
+              }}
+              onClick={() =>
+                setMenu({
+                  info: false,
+                  move: false,
+                  baseStats: true,
+                })
+              }
+            >
+              <h5
+                style={{
+                  fontSize: 18,
+                  color: menu.baseStats
+                    ? props?.location?.state?.typeColor
+                    : Color.black,
+                }}
+              >
+                Base State
+              </h5>
             </div>
           </div>
         </div>
-        <Spacer size={30} />
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            marginBottom: 10,
+            backgroundColor: Color.lightGrey2,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            minHeight: 200,
+            padding: 20,
           }}
         >
-          <div
-            style={{
-              cursor: "pointer",
-              padding: "3px 15px",
-              borderBottom:
-                menu.info && `2px solid ${props?.location?.state?.typesColor}`,
-            }}
-            onClick={() =>
-              setMenu({
-                info: true,
-                move: false,
-                baseStats: false,
-              })
-            }
-          >
-            <h5
-              style={{
-                fontSize: 18,
-                color: menu.info
-                  ? props?.location?.state?.typesColor
-                  : Color.black,
-              }}
-            >
-              Info
-            </h5>
-          </div>
-          <div
-            style={{
-              cursor: "pointer",
-              padding: "3px 15px",
-              borderBottom:
-                menu.move && `2px solid ${props?.location?.state?.typesColor}`,
-            }}
-            onClick={() =>
-              setMenu({
-                info: false,
-                move: true,
-                baseStats: false,
-              })
-            }
-          >
-            <h5
-              style={{
-                fontSize: 18,
-                color: menu.move
-                  ? props?.location?.state?.typesColor
-                  : Color.black,
-              }}
-            >
-              Move
-            </h5>
-          </div>
-          <div
-            style={{
-              cursor: "pointer",
-              padding: "3px 15px",
-              borderBottom:
-                menu.baseStats &&
-                `2px solid ${props?.location?.state?.typesColor}`,
-            }}
-            onClick={() =>
-              setMenu({
-                info: false,
-                move: false,
-                baseStats: true,
-              })
-            }
-          >
-            <h5
-              style={{
-                fontSize: 18,
-                color: menu.baseStats
-                  ? props?.location?.state?.typesColor
-                  : Color.black,
-              }}
-            >
-              Base State
-            </h5>
-          </div>
+          {menu.info && (
+            <PokemonInfo pokemon={props?.location?.state?.data?.pokemon} />
+          )}
+          {menu.move && (
+            <PokemonMoves
+              moves={props?.location?.state?.data?.pokemon?.moves}
+              color={props?.location?.state?.typeColor}
+            />
+          )}
+          {menu.baseStats && (
+            <PokemonBaseStats
+              stats={props?.location?.state?.data?.pokemon?.stats}
+              color={props?.location?.state?.typeColor}
+            />
+          )}
         </div>
-      </div>
-      <div
-        style={{
-          backgroundColor: "white",
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          minHeight: 200,
-          padding: 20,
-        }}
-      >
-        {menu.info && (
-          <PokemonInfo pokemon={props?.location?.state?.data?.pokemon} />
-        )}
-        {menu.move && (
-          <PokemonMoves moves={props?.location?.state?.data?.pokemon?.moves} />
-        )}
-        {menu.baseStats && (
-          <PokemonBaseStats stats={props?.location?.state?.data?.pokemon?.stats} />
-        )}
       </div>
     </div>
   );

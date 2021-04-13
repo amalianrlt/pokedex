@@ -2,7 +2,6 @@ import React from "react";
 import { Color } from "../../utils/Color";
 
 const PokemonBaseStats = (props) => {
-  // console.log(props.stats);
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {props.stats?.map((stat, idx) => (
@@ -18,7 +17,7 @@ const PokemonBaseStats = (props) => {
           >
             <div
               style={{
-                backgroundColor: "teal",
+                backgroundColor: props?.color,
                 height: 15,
                 width: `${stat.base_stat}%`,
                 borderRadius: 8,
@@ -47,14 +46,6 @@ const PokemonBaseStats = (props) => {
           </div>
         </div>
       ))}
-      {/* <div>
-        {props.stats?.map((stat, idx) => (
-          <div key={idx}>
-            <p>{stat.stat.name}</p>
-            <p>{stat.base_stat}</p>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 };
