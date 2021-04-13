@@ -6,6 +6,7 @@ import GET_POKEMON_DETAIL from "../../graphql/getDetailPokemon";
 import { Color } from "../../utils/Color";
 import Lottie from "react-lottie";
 import pikacu from "../../assets/animations/pikachu.json";
+import { toUpperCase } from "../../utils/upperCase";
 
 const PokemonCard = (props) => {
   const { data, loading } = useQuery(GET_POKEMON_DETAIL, {
@@ -20,11 +21,6 @@ const PokemonCard = (props) => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-
-  // console.log(data, "check");
-  function toUpperCase(string) {
-    return string?.charAt(0)?.toUpperCase() + string?.slice(1);
-  }
 
   return (
     <div

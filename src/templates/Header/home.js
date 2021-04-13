@@ -2,7 +2,7 @@ import React from "react";
 import { child } from "../../assets";
 import { Link } from "react-router-dom";
 
-const HomePageHeader = (props) => {
+const HomePageHeader = () => {
   return (
     <div
       style={{
@@ -17,7 +17,7 @@ const HomePageHeader = (props) => {
         <h1 style={{ fontWeight: 900 }}>The World</h1>
         <h3 style={{ fontWeight: 300 }}>of Pocket Monster</h3>
       </div>
-      <Link to="/owned">
+      <Link to="/mypokemon">
         <div
           style={{
             display: "flex",

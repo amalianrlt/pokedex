@@ -52,7 +52,6 @@ const PokemonList = () => {
   return (
     <div
       style={{
-        // width: "375px",
         backgroundColor: "#FAE159",
         marginLeft: "auto",
         marginRight: "auto",
@@ -70,7 +69,6 @@ const PokemonList = () => {
       >
         {!loading && data ? (
           <>
-            {/* <PokemonOwnedCard /> */}
             <div
               style={{
                 display: "flex",

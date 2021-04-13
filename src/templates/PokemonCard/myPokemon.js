@@ -24,7 +24,6 @@ const MyPokemonCard = (props) => {
     <div
       style={{
         backgroundColor: bgColor,
-        // width: props.width ?? "100px",
         margin: "4px",
         borderRadius: 8,
         display: "flex",
@@ -49,7 +48,6 @@ const MyPokemonCard = (props) => {
           >
             {toUpperCase(props.data?.name)}
           </h1>
-          {/* <Spacer /> */}
           <div>
             <img
               src={props?.data?.species?.url}
@@ -58,7 +56,6 @@ const MyPokemonCard = (props) => {
               height="70"
             />
           </div>
-          {/* <Spacer /> */}
           <h1
             style={{
               fontSize: "12px",

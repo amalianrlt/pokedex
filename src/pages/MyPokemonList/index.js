@@ -28,8 +28,6 @@ const MyPokemonList = () => {
         return Promise.all([statusCode, data]);
       })
       .then(([res, data]) => {
-        // console.log(res, data);
-
         if (res === 200) {
           setMyPokemonList(data.result);
           setIsLoading(false);
@@ -40,11 +38,6 @@ const MyPokemonList = () => {
       .catch((error) => {
         console.log("Error:", error);
         setIsLoading(false);
-        // setIsOffline({
-        //   ...isOffline,
-        //   notification: true,
-        //   reload: true,
-        // });
       });
   };
 
@@ -157,11 +150,9 @@ const MyPokemonList = () => {
   return (
     <div
       style={{
-        // width: "375px",
         backgroundColor: "#FAE159",
         marginLeft: "auto",
         marginRight: "auto",
-        // minHeight: "100vh",
       }}
     >
       <Header
@@ -179,7 +170,7 @@ const MyPokemonList = () => {
       >
         <img src={child} width="100" height="100" alt="child" />
         <Spacer />
-        <p>My Pokemon ({myPokemonList?.length})</p>
+        {myPokemonList?.length && <p>My Pokemon ({myPokemonList?.length})</p>}
       </div>
       <Spacer />
       <div
@@ -206,7 +197,6 @@ const MyPokemonList = () => {
                   <MyPokemonCard
                     width={"31%"}
                     data={pokemon}
-                    // key={idx}
                     deletePokemon={(e) => deletePokemon(pokemon.id, e)}
                   />
                 </Col>
