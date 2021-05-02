@@ -1,6 +1,6 @@
 # Pokedex site
 
-This project is intended to complete the assignment for Tokopedia as a Software Engineer - Web Platform. This web app build based on React.js that has 3 pages, Pokemon List, Pokemon Detail, and My Pokemon List. 
+This web app build based on React.js that has 3 pages, Pokemon List, Pokemon Detail, and My Pokemon List. 
 
 ### Pokemon List Page
 Show a list of Pokemons’ names and the owned total. When a Pokemon Card is clicked, it go to Pokemon Detail page.
